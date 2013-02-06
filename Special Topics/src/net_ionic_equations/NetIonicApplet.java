@@ -22,6 +22,7 @@ public class NetIonicApplet {
         else {
             JOptionPane.showMessageDialog(null, "You didn't type in \"something\"");
         }
+        System.out.println("Something new");
     }
     
 }
