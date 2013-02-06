@@ -24,6 +24,7 @@ public class NetIonicApplet {
         }
         System.out.println("I don't want this here. Fix my git now");
         System.out.println("New system.out");
+        System.out.println("Somethign new");
     }
     
 }
