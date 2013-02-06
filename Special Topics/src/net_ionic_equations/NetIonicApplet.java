@@ -23,8 +23,7 @@ public class NetIonicApplet {
             JOptionPane.showMessageDialog(null, "You didn't type in \"something\"");
         }
         System.out.println("I don't want this here. Fix my git now");
-        System.out.println("New system.out");
-        System.out.println("Somethign new");
+        System.out.println("Stupid");
     }
     
 }
