@@ -4,6 +4,8 @@
  */
 package net_ionic_equations;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -25,63 +27,63 @@ public class NetIonicApplet extends JApplet{
     private JComboBox jcbSolute1 = new JComboBox();
     private JComboBox jcbSolute2 = new JComboBox();
     
+    //Buttons
+    private JButton jbMix = new JButton("Mix");
+    private JButton jbPour = new JButton("Pour");
+    
     //Radio buttons to select the correct Net-Ionic Equation (NIE)
     private JRadioButton equation1 = new JRadioButton("Equation1");
     private JRadioButton equation2 = new JRadioButton("Equation2");
     private JRadioButton equation3 = new JRadioButton("Equation3");
     
     //Panels
-    private JPanel chemicalPanel = new JPanel();
-    private JPanel equationsPanel = new JPanel();
+    private JPanel interactionPanel = new JPanel(new BorderLayout()); //Contains the combo, chemical, and button Panels
+    private JPanel comboPanel = new JPanel(new BorderLayout()); //Contains comboboxes
+    private JPanel chemicalPanel = new JPanel(); //Contains PApplet
+    private JPanel buttonPanel = new JPanel(new BorderLayout()); //contains Mix & Pour buttons
+    private JPanel equationsPanel = new JPanel(new BorderLayout()); //Contains equations to pick from
+    private JPanel mixPanel = new JPanel();
+    private JPanel pourPanel = new JPanel();
+    private JPanel solute1Panel = new JPanel();
+    private JPanel solute2Panel = new JPanel();
     
     public void init(){
-        GridBagLayout gbl = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbl.setConstraints(this, gbc);
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.weightx = gbc.weighty = 2;
-        gbc.insets = new Insets(2,2,2,2);
-        //Set the applet window to be a GridBagLayout
-        this.setLayout(gbl);
+
+        this.setLayout(new BorderLayout());
+        //Add panels to the interaction panel
+        interactionPanel.add(comboPanel, BorderLayout.NORTH);
+        interactionPanel.add(chemicalPanel, BorderLayout.CENTER);
+        interactionPanel.add(buttonPanel, BorderLayout.SOUTH);
         
-        
-        //Panel with PApplet, JComboBoxes, and Buttons in it
-        JPanel chemicalPanel = new JPanel();
-        this.add(chemicalPanel, gbc);
-        chemicalPanel.setLayout(gbl);
-        
-        //Solute 1 Combo Box properties
-        gbc.gridwidth=10;
-        chemicalPanel.add(jcbSolute1, gbc);
-        
-        //Solute 2 Combo Box properties
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        chemicalPanel.add(jcbSolute2, gbc);
-        
-        gbc.gridwidth=1;
-        JButton jbMix = new JButton("Mix");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        chemicalPanel.add(jbMix, gbc);
-        
-        gbc.weightx = gbc.weighty = 2;
-        equationsPanel.setLayout(gbl);
         equationsPanel.setBorder(BorderFactory.createTitledBorder(new BevelBorder(BevelBorder.LOWERED), "Net-Ionic Equations"));
-        gbc.gridx = 0;
-        gbc.gridy = 10;
-        gbc.gridwidth=10;
-        this.add(equationsPanel, gbc);
         
-        gbc.gridwidth=1;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        equationsPanel.add(equation1, gbc);
-        gbc.gridy = 1;
-        equationsPanel.add(equation2, gbc);
-        gbc.gridy = 2;
-        equationsPanel.add(equation3, gbc);
+        //Add the panels to the JApplet
+        this.add(interactionPanel, BorderLayout.CENTER);
+        this.add(equationsPanel, BorderLayout.SOUTH);
+        
+        jbMix.setPreferredSize(new Dimension(75,40));
+        jbPour.setPreferredSize(new Dimension(75,40));
+
+        //Add buttons to buttonPanel
+        JPanel temp = new JPanel();
+        temp.add(jbMix);
+        JPanel temp2 = new JPanel();
+        temp2.add(jbPour);
+        
+        buttonPanel.add(temp, BorderLayout.WEST);
+        buttonPanel.add(temp2, BorderLayout.EAST);
+        
+        jcbSolute1.setPreferredSize(new Dimension(100,20));
+        jcbSolute2.setPreferredSize(new Dimension(100,20));
+        solute1Panel.add(jcbSolute1);
+        solute2Panel.add(jcbSolute2);
+        //Add comboboxes to comboPanel
+        comboPanel.add(solute1Panel, BorderLayout.WEST);
+        comboPanel.add(solute2Panel, BorderLayout.EAST);
+        
+        equationsPanel.add(equation1, BorderLayout.NORTH);
+        equationsPanel.add(equation2, BorderLayout.CENTER);
+        equationsPanel.add(equation3, BorderLayout.SOUTH);
         
         
         this.setSize(800,480);
