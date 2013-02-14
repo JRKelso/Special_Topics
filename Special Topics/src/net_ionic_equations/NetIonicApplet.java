@@ -42,10 +42,10 @@ public class NetIonicApplet extends JApplet{
     private JPanel chemicalPanel = new JPanel(); //Contains PApplet
     private JPanel buttonPanel = new JPanel(new BorderLayout()); //contains Mix & Pour buttons
     private JPanel equationsPanel = new JPanel(new BorderLayout()); //Contains equations to pick from
-    private JPanel mixPanel = new JPanel();
-    private JPanel pourPanel = new JPanel();
-    private JPanel solute1Panel = new JPanel();
-    private JPanel solute2Panel = new JPanel();
+    private JPanel mixPanel = new JPanel(); //Panel for the mix button
+    private JPanel pourPanel = new JPanel(); //Panel for the pour button
+    private JPanel solute1Panel = new JPanel(); //Panel for the solute1 combobox
+    private JPanel solute2Panel = new JPanel(); //Panel for the solute2 combobox
     
     public void init(){
 
@@ -65,13 +65,11 @@ public class NetIonicApplet extends JApplet{
         jbPour.setPreferredSize(new Dimension(75,40));
 
         //Add buttons to buttonPanel
-        JPanel temp = new JPanel();
-        temp.add(jbMix);
-        JPanel temp2 = new JPanel();
-        temp2.add(jbPour);
+        mixPanel.add(jbMix);
+        pourPanel.add(jbPour);
         
-        buttonPanel.add(temp, BorderLayout.WEST);
-        buttonPanel.add(temp2, BorderLayout.EAST);
+        buttonPanel.add(mixPanel, BorderLayout.WEST);
+        buttonPanel.add(pourPanel, BorderLayout.EAST);
         
         jcbSolute1.setPreferredSize(new Dimension(100,20));
         jcbSolute2.setPreferredSize(new Dimension(100,20));
