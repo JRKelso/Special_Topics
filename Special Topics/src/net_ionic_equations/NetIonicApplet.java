@@ -71,6 +71,8 @@ public class NetIonicApplet extends JApplet{
         buttonPanel.add(mixPanel, BorderLayout.WEST);
         buttonPanel.add(pourPanel, BorderLayout.EAST);
         
+        System.out.println("Testing2");
+        
         jcbSolute1.setPreferredSize(new Dimension(100,20));
         jcbSolute2.setPreferredSize(new Dimension(100,20));
         solute1Panel.add(jcbSolute1);
