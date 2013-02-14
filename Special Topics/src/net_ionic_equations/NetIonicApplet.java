@@ -96,8 +96,6 @@ public class NetIonicApplet extends JApplet{
         PApplet sketch = new SimpleTest();
         chemicalPanel.add(sketch);
         sketch.init();
-//        solute1LabelPanel.add(jlblSolute1);
-//        solute2LabelPanel.add(jlblSolute2);
         
         //Add comboboxes to comboPanel
         comboPanel.add(combinePanel1, BorderLayout.WEST);
