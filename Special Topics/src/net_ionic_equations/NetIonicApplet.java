@@ -13,10 +13,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.BevelBorder;
-
+import processing.core.*;
 /**
  *
  * @author JRKelso
@@ -46,6 +47,14 @@ public class NetIonicApplet extends JApplet{
     private JPanel pourPanel = new JPanel(); //Panel for the pour button
     private JPanel solute1Panel = new JPanel(); //Panel for the solute1 combobox
     private JPanel solute2Panel = new JPanel(); //Panel for the solute2 combobox
+    private JPanel solute1LabelPanel = new JPanel();
+    private JPanel solute2LabelPanel = new JPanel();
+    private JPanel combinePanel1 = new JPanel(new BorderLayout());
+    private JPanel combinePanel2 = new JPanel(new BorderLayout());
+    
+    //Labels
+    private JLabel jlblSolute1 = new JLabel("Solute 1");
+    private JLabel jlblSolute2 = new JLabel("Solute 2");
     
     public void init(){
 
@@ -68,6 +77,9 @@ public class NetIonicApplet extends JApplet{
         mixPanel.add(jbMix);
         pourPanel.add(jbPour);
         
+        solute1LabelPanel.add(jlblSolute1);
+        solute2LabelPanel.add(jlblSolute2);
+        
         buttonPanel.add(mixPanel, BorderLayout.WEST);
         buttonPanel.add(pourPanel, BorderLayout.EAST);
         
@@ -75,9 +87,21 @@ public class NetIonicApplet extends JApplet{
         jcbSolute2.setPreferredSize(new Dimension(100,20));
         solute1Panel.add(jcbSolute1);
         solute2Panel.add(jcbSolute2);
+        
+        combinePanel1.add(solute1LabelPanel, BorderLayout.NORTH);
+        combinePanel1.add(solute1Panel, BorderLayout.CENTER);
+        combinePanel2.add(solute2LabelPanel, BorderLayout.NORTH);
+        combinePanel2.add(solute2Panel, BorderLayout.CENTER);
+        
+        PApplet sketch = new SimpleTest();
+        chemicalPanel.add(sketch);
+        sketch.init();
+//        solute1LabelPanel.add(jlblSolute1);
+//        solute2LabelPanel.add(jlblSolute2);
+        
         //Add comboboxes to comboPanel
-        comboPanel.add(solute1Panel, BorderLayout.WEST);
-        comboPanel.add(solute2Panel, BorderLayout.EAST);
+        comboPanel.add(combinePanel1, BorderLayout.WEST);
+        comboPanel.add(combinePanel2, BorderLayout.EAST);
         
         equationsPanel.add(equation1, BorderLayout.NORTH);
         equationsPanel.add(equation2, BorderLayout.CENTER);
