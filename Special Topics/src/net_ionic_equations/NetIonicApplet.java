@@ -82,8 +82,7 @@ public class NetIonicApplet extends JApplet{
         equationsPanel.add(equation1, BorderLayout.NORTH);
         equationsPanel.add(equation2, BorderLayout.CENTER);
         equationsPanel.add(equation3, BorderLayout.SOUTH);
-
-        
+      
         
         this.setSize(800,480);
     }
