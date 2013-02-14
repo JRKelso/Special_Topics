@@ -31,6 +31,7 @@ public class NetIonicApplet extends JApplet{
     //Buttons
     private JButton jbMix = new JButton("Mix");
     private JButton jbPour = new JButton("Pour");
+    private JButton jbPeriodic = new JButton("Periodic Table");
     
     //Radio buttons to select the correct Net-Ionic Equation (NIE)
     private JRadioButton equation1 = new JRadioButton("Equation1");
@@ -47,10 +48,12 @@ public class NetIonicApplet extends JApplet{
     private JPanel pourPanel = new JPanel(); //Panel for the pour button
     private JPanel solute1Panel = new JPanel(); //Panel for the solute1 combobox
     private JPanel solute2Panel = new JPanel(); //Panel for the solute2 combobox
-    private JPanel solute1LabelPanel = new JPanel();
-    private JPanel solute2LabelPanel = new JPanel();
-    private JPanel combinePanel1 = new JPanel(new BorderLayout());
-    private JPanel combinePanel2 = new JPanel(new BorderLayout());
+    private JPanel solute1LabelPanel = new JPanel(); //Panel for the solute1 label
+    private JPanel solute2LabelPanel = new JPanel(); //Panel for the solute2 label
+    private JPanel combinePanel1 = new JPanel(new BorderLayout()); //panel to combine combobox and label together
+    private JPanel combinePanel2 = new JPanel(new BorderLayout()); //panel to combine combobox and label together
+    private JPanel netIonicPanel = new JPanel(new BorderLayout()); //panel for the net-ionic
+    private JPanel periodicPanel = new JPanel();
     
     //Labels
     private JLabel jlblSolute1 = new JLabel("Solute 1");
@@ -64,11 +67,11 @@ public class NetIonicApplet extends JApplet{
         interactionPanel.add(chemicalPanel, BorderLayout.CENTER);
         interactionPanel.add(buttonPanel, BorderLayout.SOUTH);
         
-        equationsPanel.setBorder(BorderFactory.createTitledBorder(new BevelBorder(BevelBorder.LOWERED), "Net-Ionic Equations"));
+        netIonicPanel.setBorder(BorderFactory.createTitledBorder(new BevelBorder(BevelBorder.LOWERED), "Net-Ionic Equations"));
         
         //Add the panels to the JApplet
         this.add(interactionPanel, BorderLayout.CENTER);
-        this.add(equationsPanel, BorderLayout.SOUTH);
+        this.add(netIonicPanel, BorderLayout.SOUTH);
         
         jbMix.setPreferredSize(new Dimension(75,40));
         jbPour.setPreferredSize(new Dimension(75,40));
@@ -96,8 +99,6 @@ public class NetIonicApplet extends JApplet{
         PApplet sketch = new SimpleTest();
         chemicalPanel.add(sketch);
         sketch.init();
-//        solute1LabelPanel.add(jlblSolute1);
-//        solute2LabelPanel.add(jlblSolute2);
         
         //Add comboboxes to comboPanel
         comboPanel.add(combinePanel1, BorderLayout.WEST);
@@ -106,6 +107,11 @@ public class NetIonicApplet extends JApplet{
         equationsPanel.add(equation1, BorderLayout.NORTH);
         equationsPanel.add(equation2, BorderLayout.CENTER);
         equationsPanel.add(equation3, BorderLayout.SOUTH);
+        jbPeriodic.setPreferredSize(new Dimension(125,60));
+        periodicPanel.add(jbPeriodic);
+        
+        netIonicPanel.add(equationsPanel, BorderLayout.WEST);
+        netIonicPanel.add(periodicPanel, BorderLayout.EAST);
       
         
         this.setSize(800,480);
