@@ -6,10 +6,8 @@ package net_ionic_equations;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,9 +27,11 @@ public class NetIonicApplet extends JApplet{
     private JComboBox jcbSolute2 = new JComboBox();
     
     //Buttons
-    private JButton jbMix = new JButton("Mix");
+    private JButton jbAdd = new JButton("Add Solutes");
     private JButton jbPour = new JButton("Pour");
     private JButton jbPeriodic = new JButton("Periodic Table");
+    
+    private ButtonGroup bg = new ButtonGroup();
     
     //Radio buttons to select the correct Net-Ionic Equation (NIE)
     private JRadioButton equation1 = new JRadioButton("Equation1");
@@ -53,7 +53,7 @@ public class NetIonicApplet extends JApplet{
     private JPanel combinePanel1 = new JPanel(new BorderLayout()); //panel to combine combobox and label together
     private JPanel combinePanel2 = new JPanel(new BorderLayout()); //panel to combine combobox and label together
     private JPanel netIonicPanel = new JPanel(new BorderLayout()); //panel for the net-ionic
-    private JPanel periodicPanel = new JPanel();
+    private JPanel periodicPanel = new JPanel(); //Panel that contains period table button
     
     //Labels
     private JLabel jlblSolute1 = new JLabel("Solute 1");
@@ -73,11 +73,11 @@ public class NetIonicApplet extends JApplet{
         this.add(interactionPanel, BorderLayout.CENTER);
         this.add(netIonicPanel, BorderLayout.SOUTH);
         
-        jbMix.setPreferredSize(new Dimension(75,40));
+        jbAdd.setPreferredSize(new Dimension(75,40));
         jbPour.setPreferredSize(new Dimension(75,40));
 
         //Add buttons to buttonPanel
-        mixPanel.add(jbMix);
+        mixPanel.add(jbAdd);
         pourPanel.add(jbPour);
         
         solute1LabelPanel.add(jlblSolute1);
@@ -104,9 +104,17 @@ public class NetIonicApplet extends JApplet{
         comboPanel.add(combinePanel1, BorderLayout.WEST);
         comboPanel.add(combinePanel2, BorderLayout.EAST);
         
+        //adds equation radio buttons to button group
+        bg.add(equation1);
+        bg.add(equation2);
+        bg.add(equation3);
+        
+        //adds radio buttons to the equations panel
         equationsPanel.add(equation1, BorderLayout.NORTH);
         equationsPanel.add(equation2, BorderLayout.CENTER);
         equationsPanel.add(equation3, BorderLayout.SOUTH);
+        
+        //set size of periodic table button
         jbPeriodic.setPreferredSize(new Dimension(125,60));
         periodicPanel.add(jbPeriodic);
         
