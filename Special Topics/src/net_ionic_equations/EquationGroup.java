@@ -11,7 +11,6 @@ import javax.swing.JRadioButton;
  * @author JRKelso
  */
 public class EquationGroup {
-    private int id;
     private JRadioButton[] equations = new JRadioButton[3];
     private JRadioButton equation1;
     private JRadioButton equation2;
@@ -19,7 +18,6 @@ public class EquationGroup {
     private byte correctAnswer;
     
     public EquationGroup(){
-        id = 0;
         equation1 = new JRadioButton("Default1");
         equation2 = new JRadioButton("Default2");
         equation3 = new JRadioButton("Default3");
@@ -29,22 +27,10 @@ public class EquationGroup {
         correctAnswer = 0;
     }
     
-    public EquationGroup(int id, JRadioButton[] eqs){
-        
-    }
-    
-    public void setId(int id){
-        if (id > 0){
-            this.id = id;
-        }
-    }
-    
-    public int getId(){
-        return id;
-    }
-    
-    public void setEquations(JRadioButton[] eqs){
-        equations = eqs;
+    public void setEquations(String eq1, String eq2, String eq3){
+        equation1.setText(eq1);
+        equation2.setText(eq2);
+        equation3.setText(eq3);
     }
     
     public JRadioButton[] getEquations(){
