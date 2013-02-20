@@ -6,6 +6,8 @@ package net_ionic_equations;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JApplet;
@@ -109,6 +111,9 @@ public class NetIonicApplet extends JApplet{
         bg.add(equation2);
         bg.add(equation3);
         
+        //equation1.setText("Fe\u00B3\u207A + 3OH\u207B \u2192 3NaCl + Fe(OH)\u2083");
+        
+        EquationSelector es = new EquationSelector();
         //adds radio buttons to the equations panel
         equationsPanel.add(equation1, BorderLayout.NORTH);
         equationsPanel.add(equation2, BorderLayout.CENTER);
@@ -123,6 +128,12 @@ public class NetIonicApplet extends JApplet{
       
         
         this.setSize(800,480);
+    }
+    
+    class DropListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            
+        }
     }
     
 }
