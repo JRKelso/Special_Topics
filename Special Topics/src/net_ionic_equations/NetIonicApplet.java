@@ -28,6 +28,13 @@ public class NetIonicApplet extends JApplet{
     private JComboBox jcbSolute1 = new JComboBox();
     private JComboBox jcbSolute2 = new JComboBox();
     
+    //Element Arrays
+    private String[] solute1;
+    private String[] solute2Set1;
+    private String[] solute2Set2;
+    private String[] solute2Set3;
+    private String[] solute2Set4;
+    
     //Buttons
     private JButton jbAdd = new JButton("Add Solutes");
     private JButton jbPour = new JButton("Pour");
@@ -56,12 +63,26 @@ public class NetIonicApplet extends JApplet{
     private JPanel combinePanel2 = new JPanel(new BorderLayout()); //panel to combine combobox and label together
     private JPanel netIonicPanel = new JPanel(new BorderLayout()); //panel for the net-ionic
     private JPanel periodicPanel = new JPanel(); //Panel that contains period table button
+    private JPanel regularEq = new JPanel(new BorderLayout());
     
     //Labels
     private JLabel jlblSolute1 = new JLabel("Solute 1");
     private JLabel jlblSolute2 = new JLabel("Solute 2");
+    private JLabel jlblRegEq = new JLabel("Default");
     
     public void init(){
+        
+        solute1 = new String[]{"Na","Fe","H","Cu"};
+        for(int i = 0; i < solute1.length; i++){
+            jcbSolute1.addItem(solute1[i]);
+        }
+        solute2Set1 = new String[]{"Fe","H","Cu","Pb","Ag"};
+        for (int i = 0; i < solute2Set1.length; i++){
+            jcbSolute2.addItem(solute2Set1[i]);
+        }
+        solute2Set2 = new String[]{"Pb","H","Na","Ag"};
+        solute2Set3 = new String[]{"Pb","Ag","Na","Fe"};
+        solute2Set4 = new String[]{"Pb","Na","Ag"};
 
         this.setLayout(new BorderLayout());
         //Add panels to the interaction panel
@@ -75,12 +96,17 @@ public class NetIonicApplet extends JApplet{
         this.add(interactionPanel, BorderLayout.CENTER);
         this.add(netIonicPanel, BorderLayout.SOUTH);
         
-        jbAdd.setPreferredSize(new Dimension(75,40));
+        jbAdd.setPreferredSize(new Dimension(110,40));
         jbPour.setPreferredSize(new Dimension(75,40));
 
         //Add buttons to buttonPanel
         mixPanel.add(jbAdd);
         pourPanel.add(jbPour);
+        
+        jbAdd.addActionListener(new ButtonListener());
+        
+        regularEq.add(new JLabel("Regular Equation"), BorderLayout.NORTH);
+        regularEq.add(jlblRegEq, BorderLayout.CENTER);
         
         solute1LabelPanel.add(jlblSolute1);
         solute2LabelPanel.add(jlblSolute2);
@@ -90,6 +116,9 @@ public class NetIonicApplet extends JApplet{
         
         jcbSolute1.setPreferredSize(new Dimension(100,20));
         jcbSolute2.setPreferredSize(new Dimension(100,20));
+        
+        jcbSolute1.addActionListener(new DropListener());
+        
         solute1Panel.add(jcbSolute1);
         solute2Panel.add(jcbSolute2);
         
@@ -111,9 +140,6 @@ public class NetIonicApplet extends JApplet{
         bg.add(equation2);
         bg.add(equation3);
         
-        //equation1.setText("Fe\u00B3\u207A + 3OH\u207B \u2192 3NaCl + Fe(OH)\u2083");
-        
-        EquationSelector es = new EquationSelector();
         //adds radio buttons to the equations panel
         equationsPanel.add(equation1, BorderLayout.NORTH);
         equationsPanel.add(equation2, BorderLayout.CENTER);
@@ -123,16 +149,57 @@ public class NetIonicApplet extends JApplet{
         jbPeriodic.setPreferredSize(new Dimension(125,60));
         periodicPanel.add(jbPeriodic);
         
+        
+        netIonicPanel.add(regularEq, BorderLayout.CENTER);
         netIonicPanel.add(equationsPanel, BorderLayout.WEST);
         netIonicPanel.add(periodicPanel, BorderLayout.EAST);
       
         
-        this.setSize(800,480);
+        this.setSize(800,480); //set the JApplet size to 800x480
     }
     
     class DropListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            
+            if (jcbSolute1.getSelectedIndex() == 0){
+                jcbSolute2.removeAllItems();
+                for (int i=0;i<solute2Set1.length;i++){
+                    jcbSolute2.addItem(solute2Set1[i]);
+                }
+            }
+            else if (jcbSolute1.getSelectedIndex() == 1){
+                jcbSolute2.removeAllItems();
+                for (int i = 0;i < solute2Set2.length;i++){
+                    jcbSolute2.addItem(solute2Set2[i]);
+                }
+            }
+            else if (jcbSolute1.getSelectedIndex() == 2){
+                jcbSolute2.removeAllItems();
+                for (int i = 0; i < solute2Set3.length; i++){
+                    jcbSolute2.addItem(solute2Set3[i]);
+                }
+            }
+            else if (jcbSolute1.getSelectedIndex() == 3){
+                jcbSolute2.removeAllItems();
+                for (int i = 0; i < solute2Set4.length; i++){
+                    jcbSolute2.addItem(solute2Set4[i]);
+                }
+            }
+        }
+    }
+    
+    class ButtonListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            if (e.getSource() == jbAdd){
+                EquationSelector es = new EquationSelector();
+                EquationGroup eg = es.select(jcbSolute1.getSelectedItem().toString(), jcbSolute2.getSelectedItem().toString());
+                JRadioButton[] eqs = eg.getEquations();
+                equation1.setText(eqs[0].getText());
+                equation2.setText(eqs[1].getText());
+                equation3.setText(eqs[2].getText());
+                jcbSolute1.setEnabled(false);
+                jcbSolute2.setEnabled(false);
+                jbAdd.setEnabled(false);
+            }
         }
     }
     
