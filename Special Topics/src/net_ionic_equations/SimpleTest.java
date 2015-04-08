@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package net_ionic_equations;
-import net_ionic_equations.Ball;
 import processing.core.*;
 /**
  *
